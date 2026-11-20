@@ -130,7 +130,7 @@ async function setupVisits() {
   const button = document.querySelector('#visit-count');
   const total = document.querySelector('#visit-total');
   if (!button || !total) return;
-  button.addEventListener('click', () => announce('Visitas desde la activación del contador. Cada navegador cuenta una vez; no es un conteo exacto de personas.'));
+  button.addEventListener('click', () => announce('Conteo de personitas desconocidas que vieron mi página.'));
   try {
     const headers = { 'Content-Type': 'application/json' };
     try {
