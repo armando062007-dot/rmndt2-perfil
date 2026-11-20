@@ -23,7 +23,7 @@ El contador necesita un alojamiento compatible con Workers y D1, con los enlaces
 
 ## Cómo se cuentan las visitas
 
-Cada navegador recibe un identificador aleatorio anónimo. Se conserva en almacenamiento local y cookies para evitar sumar visitas al recargar o volver otro día. El servidor da prioridad a su cookie cuando está disponible. La base guarda únicamente la huella SHA-256 de ese identificador, no nombres, correos ni IP.
+Cada navegador recibe el identificador aleatorio anónimo (Por seguridad) :v). Se conserva en almacenamiento local y cookies para evitar sumar visitas al recargar o volver otro día, basicamente evitar frmeos de visitas. El servidor da prioridad a su cookie cuando está disponible. La base guarda únicamente la huella SHA-256 de ese identificador, no nombres, correos ni IP (No se preocupen por todo eso.
 
 Un identificador repetido se inserta una sola vez gracias a la clave primaria de la base de datos, incluso con solicitudes simultáneas. El total es compartido y persiste después de reiniciar o publicar cambios.
 
