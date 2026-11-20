@@ -8,7 +8,7 @@
   <title>Armando · Nuruxion</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-rmndt2-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon-rmndt2-180.png">
-  <link rel="stylesheet" href="style.css?v=votos">
+  <link rel="stylesheet" href="style.css?v=votos-unidos">
   <script src="profile.js?v=votos" defer></script>
 </head>
 <body>
@@ -126,12 +126,14 @@
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         <span id="visit-total" aria-live="polite">…</span>
       </button>
-      <button id="vote-up" class="vote-count" type="button" aria-label="Votar positivo" aria-pressed="false" title="Votar positivo · Un solo voto por IP" disabled>
-        <span class="vote-direction" aria-hidden="true">↑</span><span class="vote-label">Voto positivo</span><span id="vote-up-total" class="vote-total">…</span>
-      </button>
-      <button id="vote-down" class="vote-count" type="button" aria-label="Votar negativo" aria-pressed="false" title="Votar negativo · Un solo voto por IP" disabled>
-        <span class="vote-direction" aria-hidden="true">↓</span><span class="vote-label">Voto negativo</span><span id="vote-down-total" class="vote-total">…</span>
-      </button>
+      <div class="vote-group" role="group" aria-label="Votaciones: un solo voto por IP">
+        <button id="vote-up" class="vote-count" type="button" aria-label="Votar positivo" aria-pressed="false" title="Un solo voto por IP" disabled>
+          <span class="vote-direction" aria-hidden="true">↑</span><span id="vote-up-total" class="vote-total">…</span>
+        </button>
+        <button id="vote-down" class="vote-count" type="button" aria-label="Votar negativo" aria-pressed="false" title="Un solo voto por IP" disabled>
+          <span class="vote-direction" aria-hidden="true">↓</span><span id="vote-down-total" class="vote-total">…</span>
+        </button>
+      </div>
       <button id="share-profile" type="button" aria-label="Compartir perfil" title="Compartir perfil"><svg><use href="#share"/></svg></button>
     </div>
   </aside>
