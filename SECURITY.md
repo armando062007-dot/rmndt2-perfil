@@ -17,6 +17,10 @@ El sitio no necesita secretos en el navegador. El identificador de visita no aut
 
 ## Límites conocidos
 
+Los votos se deduplican por una HMAC de la IP normalizada recibida del proveedor, con clave privada en D1. Los conteos y el voto de la conexión actual son los únicos datos devueltos; no se ofrece una lista de IP ni de huellas. La unicidad es una restricción del servidor y de la base, no un bloqueo exclusivamente visual. No se acepta votar cuando falta una IP confiable.
+
+El proveedor debe suministrar la IP original en `CF-Connecting-IP`. Un proxy mal configurado que reemplace todas las IP por la suya agruparía visitantes distintos. Las VPN, la rotación de IP y las redes compartidas limitan cualquier regla de un voto por IP.
+
 El contador no es una barrera antifraude: un cliente puede borrar todas sus marcas o generar identificadores nuevos. Bloquear eso de forma absoluta requeriría controles adicionales, por ejemplo cuentas verificadas o protección de abuso en el proveedor. No identificamos hardware, no prometemos una persona por dispositivo y no almacenamos IP para ese fin.
 
 El filtrado de bots por agente de usuario es orientativo, no una garantía. Las cookies y el almacenamiento local pueden ser bloqueados por el usuario. Los navegadores distintos del mismo dispositivo pueden aparecer como visitantes diferentes.

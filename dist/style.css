@@ -61,15 +61,22 @@ h1{font-size:clamp(45px,6.3vw,69px);line-height:1;font-weight:780;letter-spacing
 .social .wing{width:24px;height:29px;stroke:none;fill:#d5a3a9;opacity:.82}
 .wing.right{transform:scaleX(-1)}
 .utilities{position:fixed;z-index:2;right:max(15px,env(safe-area-inset-right));bottom:max(15px,env(safe-area-inset-bottom))}
-.controls{display:flex;gap:6px}
+.controls{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:calc(100vw - 30px)}
 .controls button{background:#4b2c38;border:1px solid #e3a3b329;cursor:pointer}
 .controls button svg{width:19px;height:19px}
 .controls .visit-count{display:flex;align-items:center;justify-content:center;gap:7px;width:auto;min-width:66px;padding:0 12px;font-size:.875rem;font-variant-numeric:tabular-nums}
+.controls .vote-count{display:flex;align-items:center;justify-content:center;gap:4px;width:auto;min-width:50px;padding:0 9px;font-size:.875rem;font-variant-numeric:tabular-nums}
+.vote-direction{font-size:1.3rem;line-height:1}
+.vote-label{margin-right:3px}
+.controls .vote-count:disabled{cursor:default}
+.controls .vote-count:disabled:hover{transform:none;background:#4b2c38;color:inherit}
+.controls .vote-count[aria-pressed=true],.controls .vote-count[aria-pressed=true]:hover{color:var(--ring);border-color:#ffe0ae9c;background:#4a2c39}
 .controls button[hidden]{display:none}
 #toast{position:fixed;z-index:3;bottom:18px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 36px);width:max-content;padding:10px 15px;border-radius:11px;background:var(--deep);border:1px solid #efb9c779;color:var(--ink);font-size:13px}
 #toast:empty{display:none}
 #toast input{max-width:100%;font:inherit;width:310px;border:0;border-radius:4px;padding:4px 5px}
 @media(max-width:610px){
+  .vote-label{display:none}
   .interests-grid{grid-template-columns:1fr}
   .stage{padding:30px 30px 104px}
   .scroll-hint{bottom:calc(66px + env(safe-area-inset-bottom))}

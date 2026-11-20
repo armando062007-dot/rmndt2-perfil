@@ -8,8 +8,8 @@
   <title>Armando · Nuruxion</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-rmndt2-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon-rmndt2-180.png">
-  <link rel="stylesheet" href="style.css?v=visitas">
-  <script src="profile.js?v=personitas" defer></script>
+  <link rel="stylesheet" href="style.css?v=votos">
+  <script src="profile.js?v=votos" defer></script>
 </head>
 <body>
   <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -125,6 +125,12 @@
       <button id="visit-count" class="visit-count" type="button" aria-label="Cargando visitas" title="Visitas desde la activación del contador; una por navegador">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         <span id="visit-total" aria-live="polite">…</span>
+      </button>
+      <button id="vote-up" class="vote-count" type="button" aria-label="Votar positivo" aria-pressed="false" title="Votar positivo · Un solo voto por IP" disabled>
+        <span class="vote-direction" aria-hidden="true">↑</span><span class="vote-label">Voto positivo</span><span id="vote-up-total" class="vote-total">…</span>
+      </button>
+      <button id="vote-down" class="vote-count" type="button" aria-label="Votar negativo" aria-pressed="false" title="Votar negativo · Un solo voto por IP" disabled>
+        <span class="vote-direction" aria-hidden="true">↓</span><span class="vote-label">Voto negativo</span><span id="vote-down-total" class="vote-total">…</span>
       </button>
       <button id="share-profile" type="button" aria-label="Compartir perfil" title="Compartir perfil"><svg><use href="#share"/></svg></button>
     </div>

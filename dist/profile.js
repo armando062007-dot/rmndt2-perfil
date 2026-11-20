@@ -169,6 +169,64 @@ async function setupVisits() {
 
 void setupVisits();
 
+function setupVotes() {
+  const up = document.querySelector('#vote-up');
+  const down = document.querySelector('#vote-down');
+  if (!up || !down) return;
+  let pending = false;
+  let mine = null;
+  let canVote = false;
+  const format = value => new Intl.NumberFormat('es-MX', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
+  function render(data) {
+    if (![data.positive, data.negative].every(value => Number.isSafeInteger(value) && value >= 0) || ![null, 'up', 'down'].includes(data.mine)) throw new Error('Respuesta inválida');
+    mine = data.mine;
+    canVote = data.canVote === true;
+    for (const [button, choice, total] of [[up, 'up', data.positive], [down, 'down', data.negative]]) {
+      button.querySelector('.vote-total').textContent = format(total);
+      button.setAttribute('aria-pressed', String(mine === choice));
+      button.setAttribute('aria-label', `${choice === 'up' ? 'Votar positivo' : 'Votar negativo'}: ${total} votos`);
+      button.title = mine ? 'Esta IP ya votó. ¡Gracias por participar!' : canVote ? 'Un solo voto por IP, entre positivo y negativo' : 'No se pudo comprobar tu conexión';
+      button.disabled = pending || !canVote || Boolean(mine);
+    }
+  }
+  async function vote(choice) {
+    if (pending || mine || !canVote) return;
+    pending = true;
+    up.disabled = down.disabled = true;
+    try {
+      const response = await fetch('/api/votes', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ vote: choice }),
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await response.json();
+      if (!response.ok && response.status !== 409) throw new Error('No disponible');
+      render(data);
+      announce(response.status === 409 ? 'Esta conexión ya participó. Solo se permite un voto por IP.' : '¡Gracias por dejar tu voto, personita desconocida!');
+    } catch {
+      announce('No pude confirmar tu voto. Puedes intentarlo otra vez; no se contará dos veces.');
+    } finally {
+      pending = false;
+      up.disabled = down.disabled = !canVote || Boolean(mine);
+    }
+  }
+  up.addEventListener('click', () => void vote('up'));
+  down.addEventListener('click', () => void vote('down'));
+  void (async () => {
+    try {
+      const response = await fetch('/api/votes', { cache: 'no-store', signal: AbortSignal.timeout(10000) });
+      if (!response.ok) throw new Error('No disponible');
+      render(await response.json());
+    } catch {
+      for (const button of [up, down]) {
+        button.querySelector('.vote-total').textContent = '—';
+        button.title = 'Votaciones temporalmente no disponibles';
+      }
+    }
+  })();
+}
+
+setupVotes();
+
 share.addEventListener('click', async () => {
   const url = new URL(location.pathname, location.origin).href;
   if (navigator.share) {
